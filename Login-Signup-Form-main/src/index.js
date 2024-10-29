@@ -94,6 +94,31 @@ app.get('/signup', (req, res) => {
     res.render('signup');
 });
 
+
+app.post('/signup', async (req, res) => {
+        const data = {
+            name: req.body.name,
+            password: req.body.password
+        };
+    
+        try {
+            const checking = await UserSignup.findOne({ name: req.body.name });
+    
+            if (checking) {
+                return res.send("User details already exist");
+            } else {
+                await UserSignup.insertMany([data]);
+                return res.status(201).render("home", {
+                    naming: req.body.name
+                });
+            }
+        } catch (error) {
+            console.error(error); 
+            return res.send("Wrong inputs");
+        }
+    });
+
+
 app.get('/', (req, res) => {
     res.sendFile(path.join(publicPath, 'index.html'));
 });
@@ -101,8 +126,7 @@ app.get('/', (req, res) => {
 app.get('/ERegister', (req, res) => {
     res.render('registration');
 });
-app.get('/login', (req, res) => {
-  
+app.get('/login', (req, res) => {  
     res.render('login');
 });
 
