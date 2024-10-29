@@ -94,30 +94,37 @@ app.get('/signup', (req, res) => {
     res.render('signup');
 });
 
-
 app.post('/signup', async (req, res) => {
-        const data = {
-            name: req.body.name,
-            password: req.body.password
-        };
-    
-        try {
-            const checking = await UserSignup.findOne({ name: req.body.name });
-    
-            if (checking) {
-                return res.send("User details already exist");
-            } else {
-                await UserSignup.insertMany([data]);
-                return res.status(201).render("home", {
-                    naming: req.body.name
-                });
-            }
-        } catch (error) {
-            console.error(error); 
-            return res.send("Wrong inputs");
-        }
-    });
+    const data = {
+        name: req.body.name,
+        password: req.body.password
+    };
 
+    try {
+        const checking = await UserSignup.findOne({ name: req.body.name });
+
+        if (checking) {
+            // User exists, render the signup page with a message
+            return res.render("signup", {
+                message: "User details already exist. Please sign up with a different name.",
+                message1: null
+            });
+        } else {
+            await UserSignup.insertMany([data]);
+            // New user, render the home page with the user name
+            return res.render("signup", {
+                message: null,
+                message1: "Successfully Signed Up!"
+            });
+        }
+    } catch (error) {
+        console.error(error);
+        // Render the signup page with an error message
+        return res.render("signup", {
+            message: "There was an error processing your signup. Please try again."
+        });
+    }
+});
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(publicPath, 'index.html'));

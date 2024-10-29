@@ -1,20 +1,24 @@
-
 const mongoose = require("mongoose");
 
 // Suppress the deprecation warning for strictQuery
 mongoose.set('strictQuery', false);
 
 // Connect to the MongoDB database
-mongoose.connect("mongodb://localhost:27017/EventMateDB", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
+
+const MONGO_URL="mongodb://127.0.0.1:27017/EventMate";
+
+main()
+.then(()=>{
+    console.log("connected to DB");
 })
-.then(() => {
-    console.log('Mongoose connected');
+.catch((err)=>{
+    console.log(err);
 })
-.catch((e) => {
-    console.log('Connection failed:', e);  // Log the error for better debugging
-});
+
+async function main(){
+    await mongoose.connect(MONGO_URL);
+}
+
 
 // Define the schema for user signup
 const userSignupSchema = new mongoose.Schema({
@@ -95,11 +99,6 @@ const registrationSchema = new mongoose.Schema({
   }
 });
 // 
-
-
-
-
-
 
 
 
