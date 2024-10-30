@@ -5,7 +5,7 @@ mongoose.set('strictQuery', false);
 
 // Connect to the MongoDB database
 
-const MONGO_URL="mongodb://127.0.0.1:27017/EventMate";
+const MONGO_URL="mongodb://127.0.0.1:27017/EventMateDB";
 
 main()
 .then(()=>{

@@ -37,6 +37,11 @@ const transporter = nodemailer.createTransport({
         user: process.env.USER, // Your email
         pass: process.env.APP_PASSWORD, // Your app password
     },
+    // 
+    tls: {
+        rejectUnauthorized: false,
+    },
+    // 
 });
 
 // Function to create email options
@@ -209,7 +214,7 @@ app.post('/login', async (req, res) => {
         }
 
         else{
-            res.redirect("/ERegister")
+            res.redirect("registration.hbs")
         }
 
         
