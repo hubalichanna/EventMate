@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Background Style */
+        body {
+            background: linear-gradient(135deg, #4e1c88, #27104e);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: white;
+            overflow: hidden;
+        }
+
+        /* Background Stars and Mountains */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://t4.ftcdn.net/jpg/01/19/11/55/360_F_119115529_mEnw3lGpLdlDkfLgRcVSbFRuVl6sMDty.jpg') no-repeat center center;
+            background-size: cover;
+            opacity: 0.4;
+        }
+
+        /* Sign Up Container */
+        .signup-container {
+            position: relative;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 40px;
+            width: 320px;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            color: white;
+        }
+
+        /* Sign Up Header */
+        .signup-container h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        /* Input Styles */
+        .signup-container input[type="text"],
+        .signup-container input[type="password"] {
+            width: 100%;
+            padding: 10px 20px;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            outline: none;
+            font-size: 16px;
+        }
+
+        /* Submit Button */
+        .signup-container .sub {
+            background-color: rgba(255, 255, 255, 0.8);
+            color: #4e1c88;
+            border: none;
+            border-radius: 5px;
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .signup-container .sub:hover {
+            background-color: #f0f0f0;
+        }
+
+        /* Link to Login Page */
+        .signup-container a {
+            display: block;
+            margin-top: 10px;
+            color: #ffffff;
+            text-decoration: underline;
+            font-size: 14px;
+        }
+        .alert{
+            color: red;
+        }
+        .alert1{
+            color: green;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="signup-container">
+        <h1>Sign Up</h1>
+        {{#if message}}
+        <div class="alert">{{message}}</div>
+    {{/if}}
+    {{#if message1}}
+        <div class="alert">{{message1}}</div>
+    {{/if}}
+        <form method="post"  action="/signup">
+
+            <input placeholder="Name" name="name" type="text" required>
+            <input placeholder="Password" name="password" type="password" required>
+            <button type="submit" class="sub">Sign Up</button>
+        </form>
+        <p id="message"></p>
+        <a href="/login">Go back to login page</a>
+    </div>   
+</body>
+</html>
